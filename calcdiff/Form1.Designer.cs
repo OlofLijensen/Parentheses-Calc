@@ -35,10 +35,11 @@
             // 
             // Outputfield
             // 
-            this.Outputfield.Location = new System.Drawing.Point(107, 174);
+            this.Outputfield.Location = new System.Drawing.Point(136, 174);
             this.Outputfield.Name = "Outputfield";
-            this.Outputfield.Size = new System.Drawing.Size(430, 20);
+            this.Outputfield.Size = new System.Drawing.Size(381, 20);
             this.Outputfield.TabIndex = 1;
+            this.Outputfield.TextChanged += new System.EventHandler(this.Outputfield_TextChanged);
             // 
             // InputField
             // 
@@ -50,11 +51,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(55, 62);
+            this.button1.Location = new System.Drawing.Point(286, 88);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "Calculate";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

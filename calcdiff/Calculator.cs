@@ -8,16 +8,16 @@ namespace calcdiff
 {
     internal class Calculator
     {
-        private int num1;
-        private int num2;
+        private float num1;
+        private float num2;
          
-        internal Calculator(int num1, int num2) 
+        internal Calculator(float num1, float num2) 
         {
             this.num1 = num1;
             this.num2 = num2;
         }
-        internal int addition() { num1 += num2; return num1; }
-        internal int subtraktion() { num1 -= num2; return num1; }
-        internal int multiplication() { num1 *= num2; return num1; }
-        internal int division() { num1 /= num2; return num1; }
+        internal float addition() { num1 += num2; return num1; }
+        internal float subtraktion() { num1 -= num2; return num1; }
+        internal float multiplication() { num1 *= num2; return num1; }
+        internal float division() { num1 /= num2; return num1; }
     }}
