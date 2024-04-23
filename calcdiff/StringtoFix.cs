@@ -60,7 +60,6 @@ namespace calcdiff
 
                 for (int i = 1; i < operatorArray.Length;)
                 {
-
                     fixedlist.Add(operatorArray[i - 1].ToString());
                     fixedlist.Add(numbersArray[i].ToString());
                     i++;

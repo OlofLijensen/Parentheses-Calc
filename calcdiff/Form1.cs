@@ -28,21 +28,31 @@ namespace calcdiff
         {
             //get input string and store it in a var to be able to calc//
             string inputstring = InputField.Text;
+            
 
             //intiat new class called stringtoFix head over to class file with same name for additional comments//
-            StringtoFix stringtoFix = new StringtoFix();
+            //StringtoFix stringtoFix = new StringtoFix();
 
             //fixing our input string with the newly created class head over to class file with same name for mor info//
-            List<string> merged = stringtoFix.CalcReady(inputstring);
+            //List<string> merged = stringtoFix.CalcReady(inputstring);
 
+            Newstringfix newstringfix = new Newstringfix();
+            List<string> merged = newstringfix.newStringtoFix(inputstring);
+            if (merged[0] == "noob")
+            {
+                Outputfield.Text = string.Join("", merged);
+            }
             //init the calculater//
-            Calculate calculate = new Calculate();
+            else
+            {
+                Calculate calculate = new Calculate();
 
-            //head over to class called calculate for additanol comments on procces and how it works//
-            calculate.CalculatIt(merged);
+                //head over to class called calculate for additanol comments on procces and how it works//
+                calculate.CalculatIt(merged);
 
-            //output our calculated value of our input string and output in ouput field//
-            Outputfield.Text = string.Join("",merged);
+                //output our calculated value of our input string and output in ouput field//
+                Outputfield.Text = string.Join("", merged);
+            }
         }
 
         private void Outputfield_TextChanged(object sender, EventArgs e)
