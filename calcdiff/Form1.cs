@@ -36,8 +36,8 @@ namespace calcdiff
             //fixing our input string with the newly created class head over to class file with same name for mor info//
             //List<string> merged = stringtoFix.CalcReady(inputstring);
 
-            Newstringfix newstringfix = new Newstringfix();
-            List<string> merged = newstringfix.newStringtoFix(inputstring);
+            Stringfix newstringfix = new Stringfix();
+            List<string> merged = newstringfix.StringtoFix(inputstring);
             if (merged[0] == "noob")
             {
                 Outputfield.Text = string.Join("", merged);

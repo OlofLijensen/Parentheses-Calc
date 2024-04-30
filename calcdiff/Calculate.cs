@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Deployment.Internal;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -485,15 +486,18 @@ namespace calcdiff
 
                 }
 
-                //if we have done our first pass through we now want treat the other to + -
+                //if we have done our first pass through we now want treat the other to "+ -"
                 else if (!firstpassthrough)
                 {
-                    //here is our big uppdate
+                    //here is our actual loop update
                     if (i == rightParentesesIndex[countRightParanteseIndex])
                     {
+                        //uppdate start and enpoint of our list aka increase index value of our list of parantheis.
                         countLeftParanteseIndex++;
                         countRightParanteseIndex++;
+                        //to know when to end
                         timestocalced++;
+                        //condition to end our loop is that we have calculated all the paranthesis avalialble and since we add a paranthesis with our code it will effectiley have calced it all
                         if (timestocalced == leftParantesesIndex.Count()) { break; }
                         else
                         {
@@ -502,6 +506,7 @@ namespace calcdiff
                         }
 
                     }
+                    //same process see line 259 we just use + as our opperator
                     else if (list[i] == "+")
                     {
                         if (list[i + 1] == "(" || list[i - 1] == ")")
@@ -531,7 +536,6 @@ namespace calcdiff
                             list.RemoveAt(i - 1);
                             for (int j = 0; rightParentesesIndex.Count() > j; j++)
                             {
-                                Console.WriteLine("here");
                                 if (i - 1 < rightParentesesIndex[j])
                                 {
                                     rightParentesesIndex[j] -= 1;
@@ -546,14 +550,6 @@ namespace calcdiff
                             }
                             i--;
                         }
-                        foreach(string a in list)
-                        {
-                            Console.WriteLine (a);
-                            
-                        }
-                        Console.WriteLine(list[i-1]);
-                        Console.WriteLine(list[i]); 
-                        Console.WriteLine(list[i+1]); 
                         Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
 
                         //remove from list old already calced nums and opperators//
@@ -579,6 +575,7 @@ namespace calcdiff
                         }
                         i = leftParantesesIndex[countRightParanteseIndex]+1;
                     }
+                    //Same process as line 259 so comments will just be a pointer to its comments
                     else if (list[i] == "-")
                     {
                         if (list[i + 1] == "(" || list[i - 1] == ")")
@@ -606,7 +603,6 @@ namespace calcdiff
                             list.RemoveAt(i - 1);
                             for (int j = 0; rightParentesesIndex.Count() > j; j++)
                             {
-                                Console.WriteLine("here");
                                 if (i - 1 < rightParentesesIndex[j])
                                 {
                                     rightParentesesIndex[j] -= 1;
@@ -650,20 +646,27 @@ namespace calcdiff
                     else { i++; }
                 }
             }
-            for(int i = 0; i < list.Count(); i++)
-            {
-                if (list[i]=="+" || list[i] == "*" || list[i] == "/" || list[i] == "-")
-                {
-                    if (list[i + 1] == "(")
-                    {
-                        list.RemoveAt(i+i);
-                    }
-                }
-                
-            }
+            //for (int i = 0; i < list.Count(); i++)
+            //{
+            //    if (list[i] == "+" || list[i] == "*" || list[i] == "/" || list[i] == "-")
+            //    {
+            //        if (list[i + 1] == "(")
+            //        {
+            //            list.RemoveAt(i + i);
+            //        }
+            //    }
+            //
+            //}
+            //remove starting left paranthesis 
             list.RemoveAt(0);
+
+            //remove starting right paranthis
             list.RemoveAt(1);
+
+            //from our now list of elemetn 1 join all elements this 1 element into a string
             string output = string.Join("",list);
+
+            //return our value
             return output;
         }
     }
