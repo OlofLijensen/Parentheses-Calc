@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace calcdiff
 {
-    internal class Calculate
+    public class Calculate
     {
-        private List<string> list; 
+        internal List<string> list; 
         internal string CalculatIt(List<string> list) 
         {
             //We use paranthesis as our start point since they need to be dealt with first. 
@@ -278,7 +278,7 @@ namespace calcdiff
                             list.RemoveAt(i - 1);
                             for (int j = 0; rightParentesesIndex.Count() > j; j++)
                             {
-                                Console.WriteLine("here");
+
                                 if (i - 1 < rightParentesesIndex[j])
                                 {
                                     rightParentesesIndex[j] -= 1;
@@ -295,16 +295,22 @@ namespace calcdiff
                             i--;
                         }
 
-                        //Constructor where we pase our values but converted from string to int where we use CultureInfo.InvariantCulture to consitently get the right decimal
-                        Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
+                        //handel poor user input for ex 8**8
+                        try
+                        {
+                            //Constructor where we pase our values but converted from string to int where we use CultureInfo.InvariantCulture to consitently get the right decimal
+                            Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
+                            //remove from list old already calced nums and opperators since it calcs using 3 values where opperator is orignal we remove front and back
+                            list.RemoveAt(i + 1);
+                            list.RemoveAt(i);
+                            list.RemoveAt(i - 1);
 
-                        //remove from list old already calced nums and opperators since it calcs using 3 values where opperator is orignal we remove front and back
-                        list.RemoveAt(i + 1);
-                        list.RemoveAt(i);
-                        list.RemoveAt(i - 1);
+                            //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
+                            list.Insert(i - 1, calc.multiplication().ToString().Replace(",", "."));
+                        }
 
-                        //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
-                        list.Insert(i - 1, calc.multiplication().ToString().Replace(",", "."));
+                        //error to catch and also add 2 extra items to list since we delete 2 items at the end of the code
+                        catch(FormatException) { list.Clear(); list.AddRange(new string[] { "noob", "error: Formating issue!", "noob" }); ; break; }
 
                         //same as the uppdate above with the ( and ) but now minus 2 since we remove 3 add 1
                         for (int j = 0; rightParentesesIndex.Count() > j; j++)
@@ -334,7 +340,6 @@ namespace calcdiff
                             list.RemoveAt(i + 1);
                             for (int j = 0; rightParentesesIndex.Count() > j; j++)
                             {
-                                Console.WriteLine("here");
                                 if (i + 1 < rightParentesesIndex[j])
                                 {
                                     rightParentesesIndex[j] -= 1;
@@ -355,7 +360,6 @@ namespace calcdiff
                             list.RemoveAt(i - 1);
                             for (int j = 0; rightParentesesIndex.Count() > j; j++)
                             {
-                                Console.WriteLine("here");
                                 if (i - 1 < rightParentesesIndex[j])
                                 {
                                     rightParentesesIndex[j] -= 1;
@@ -370,15 +374,24 @@ namespace calcdiff
                             }
                             i--;
                         }
-                        Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
 
-                        //remove from list old already calced nums and opperators//
-                        list.RemoveAt(i + 1);
-                        list.RemoveAt(i);
-                        list.RemoveAt(i - 1);
+                        //handel poor user input for ex 8**8
+                        try
+                        {
+                            //Constructor where we pase our values but converted from string to int where we use CultureInfo.InvariantCulture to consitently get the right decimal
+                            Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
+                            //remove from list old already calced nums and opperators since it calcs using 3 values where opperator is orignal we remove front and back
+                            list.RemoveAt(i + 1);
+                            list.RemoveAt(i);
+                            list.RemoveAt(i - 1);
 
-                        //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
-                        list.Insert(i - 1, calc.division().ToString().Replace(",", "."));
+                            //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
+                            list.Insert(i - 1, calc.division().ToString().Replace(",", "."));
+                        }
+
+                        //error to catch and also add 2 extra items to list since we delete 2 items at the end of the code
+                        catch (FormatException) { list.Clear(); list.AddRange(new string[] { "noob", "error: Formating issue!", "noob" }); ; break; }
+
                         for (int j = 0; rightParentesesIndex.Count() > j; j++)
                         {
                             if (i < rightParentesesIndex[j])
@@ -454,15 +467,23 @@ namespace calcdiff
                         // if it dosent have a "usefull" opperators closeby we can trat ( or ) as a * se line 295
                         else
                         {
-                            Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
+                            //handel poor user input for ex 8**8
+                            try
+                            {
+                                //Constructor where we pase our values but converted from string to int where we use CultureInfo.InvariantCulture to consitently get the right decimal
+                                Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
+                                //remove from list old already calced nums and opperators since it calcs using 3 values where opperator is orignal we remove front and back
+                                list.RemoveAt(i + 1);
+                                list.RemoveAt(i);
+                                list.RemoveAt(i - 1);
 
-                            //remove from list old already calced nums and opperators//
-                            list.RemoveAt(i + 1);
-                            list.RemoveAt(i);
-                            list.RemoveAt(i - 1);
+                                //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
+                                list.Insert(i - 1, calc.multiplication().ToString().Replace(",", "."));
+                            }
 
-                            //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
-                            list.Insert(i - 1, calc.multiplication().ToString().Replace(",", "."));
+                            //error to catch and also add 2 extra items to list since we delete 2 items at the end of the code
+                            catch (FormatException) { list.Clear(); list.AddRange(new string[] { "noob", "error: Formating issue!", "noob" }); ; break; }
+
                             for (int j = 0; rightParentesesIndex.Count() > j; j++)
                             {
                                 if (i < rightParentesesIndex[j])
@@ -514,7 +535,6 @@ namespace calcdiff
                             list.RemoveAt(i + 1);
                             for (int j = 0; rightParentesesIndex.Count() > j; j++)
                             {
-                                Console.WriteLine("here");
                                 if (i + 1 < rightParentesesIndex[j])
                                 {
                                     rightParentesesIndex[j] -= 1;
@@ -550,15 +570,24 @@ namespace calcdiff
                             }
                             i--;
                         }
-                        Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
 
-                        //remove from list old already calced nums and opperators//
-                        list.RemoveAt(i + 1);
-                        list.RemoveAt(i);
-                        list.RemoveAt(i - 1);
+                        //handel poor user input for ex 8**8
+                        try
+                        {
+                            //Constructor where we pase our values but converted from string to int where we use CultureInfo.InvariantCulture to consitently get the right decimal
+                            Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
+                            //remove from list old already calced nums and opperators since it calcs using 3 values where opperator is orignal we remove front and back
+                            list.RemoveAt(i + 1);
+                            list.RemoveAt(i);
+                            list.RemoveAt(i - 1);
 
-                        //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
-                        list.Insert(i - 1, calc.addition().ToString().Replace(",", "."));
+                            //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
+                            list.Insert(i - 1, calc.addition().ToString().Replace(",", "."));
+                        }
+
+                        //error to catch and also add 2 extra items to list since we delete 2 items at the end of the code
+                        catch (FormatException) { list.Clear(); list.AddRange(new string[] { "noob", "error: Formating issue! ", "noob" }); ; break; }
+
                         for (int j = 0; rightParentesesIndex.Count() > j; j++)
                         {
                             if (i < rightParentesesIndex[j])
@@ -575,6 +604,7 @@ namespace calcdiff
                         }
                         i = leftParantesesIndex[countRightParanteseIndex]+1;
                     }
+
                     //Same process as line 259 so comments will just be a pointer to its comments
                     else if (list[i] == "-")
                     {
@@ -583,7 +613,6 @@ namespace calcdiff
                             list.RemoveAt(i + 1);
                             for (int j = 0; rightParentesesIndex.Count() > j; j++)
                             {
-                                Console.WriteLine("here");
                                 if (i + 1 < rightParentesesIndex[j])
                                 {
                                     rightParentesesIndex[j] -= 1;
@@ -617,15 +646,24 @@ namespace calcdiff
                             }
                             i--;
                         }
-                        Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
 
-                        //remove from list old already calced nums and opperators//
-                        list.RemoveAt(i + 1);
-                        list.RemoveAt(i);
-                        list.RemoveAt(i - 1);
+                        //handel poor user input for ex 8**8
+                        try
+                        {
+                            //Constructor where we pase our values but converted from string to int where we use CultureInfo.InvariantCulture to consitently get the right decimal
+                            Calculator calc = new Calculator(float.Parse(list[i - 1], CultureInfo.InvariantCulture), float.Parse(list[i + 1], CultureInfo.InvariantCulture));
+                            //remove from list old already calced nums and opperators since it calcs using 3 values where opperator is orignal we remove front and back
+                            list.RemoveAt(i + 1);
+                            list.RemoveAt(i);
+                            list.RemoveAt(i - 1);
 
-                        //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
-                        list.Insert(i - 1, calc.subtraktion().ToString().Replace(",", "."));
+                            //insert at left nums pose to make our list right also calc our nums with right opperator and replace if float , with . to make it reusable.//
+                            list.Insert(i - 1, calc.subtraktion().ToString().Replace(",", "."));
+                        }
+
+                        //error to catch and also add 2 extra items to list since we delete 2 items at the end of the code
+                        catch (FormatException) { list.Clear(); list.AddRange(new string[] { "noob", "error: Formating issue!", "noob" }); ; break; }
+
                         for (int j = 0; rightParentesesIndex.Count() > j; j++)
                         {
                             if (i < rightParentesesIndex[j])
@@ -646,17 +684,7 @@ namespace calcdiff
                     else { i++; }
                 }
             }
-            //for (int i = 0; i < list.Count(); i++)
-            //{
-            //    if (list[i] == "+" || list[i] == "*" || list[i] == "/" || list[i] == "-")
-            //    {
-            //        if (list[i + 1] == "(")
-            //        {
-            //            list.RemoveAt(i + i);
-            //        }
-            //    }
-            //
-            //}
+
             //remove starting left paranthesis 
             list.RemoveAt(0);
 

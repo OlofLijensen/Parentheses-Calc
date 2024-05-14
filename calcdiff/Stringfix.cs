@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace calcdiff
 {
-    internal class Stringfix
+    public class Stringfix
     {
         internal List<string> StringtoFix(string fixString)
         {
@@ -61,7 +61,7 @@ namespace calcdiff
                 {
                     //just break and send error
                     fixedString.Clear();
-                    fixedString.Insert(0, "noob"); 
+                    fixedString.Insert(0, "error: Uncalc entry found!"); 
                     break;
 
                 }
